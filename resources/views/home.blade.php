@@ -10,6 +10,7 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
+
         ::-webkit-scrollbar {
             width: 12px;
         }
@@ -42,6 +43,7 @@
             scroll-behavior: smooth;
         }
 
+        /* Custom Animations */
         @keyframes fadeInLeft {
             from {
                 opacity: 0;
@@ -74,37 +76,24 @@
             height: auto;
         }
 
+        .swiper-container {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+
         .swiper-slide {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: stretch;
+            justify-content: center;
+            align-items: center;
+            flex: 0 0 auto;
             width: 100%;
-            height: 400px;
-            box-sizing: border-box;
         }
 
-
-        .slide-image {
+        .swiper-slide img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: auto;
         }
-
-
-        .swiper-slide .p-6 {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            justify-content: space-between;
-        }
-
-
-        .swiper-slide .p-6 a {
-            margin-top: auto;
-            align-self: flex-start;
-        }
-
 
         .swiper-pagination {
             bottom: 10px;
@@ -114,8 +103,6 @@
         .swiper-button-prev {
             color: #000;
         }
-
-
             header {
             transition: background-color 0.3s, box-shadow 0.3s;
         }
@@ -124,6 +111,10 @@
             background-color: rgba(17,24,39, 0.9);
             box-shadow: 0 4px 6px rgba(17,24,39, 0.1);
         }
+        section {
+            pointer-events: auto;
+        }
+
 
     </style>
 </head>
@@ -156,12 +147,11 @@
     </div>
     <!-- Mobile Navigation Menu -->
     <div id="mobile-menu" class="hidden lg:hidden">
-        <nav class="flex flex-col items-center space-y-4 bg-gray-800 text-white p-4">
+        <nav class="flex flex-col items-center space-y-4 bg-transparent text-white p-4">
             <a href="{{ route('profile') }}" class="hover:text-blue-400">Profile</a>
             <a href="#products" id="scroll-produk" class="hover:text-blue-400">Produk</a>
             <a href="#blog" id="scroll-blog" class="hover:text-blue-400">Blog</a>
             <a href="#contact" id="scroll-contact" class="hover:text-blue-400">Kontak</a>
-            <a href="#get-started" class="inline-block bg-blue-950 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">Get Started</a>
         </nav>
     </div>
 </header>
@@ -190,20 +180,19 @@
             Kami merupakan distributor alat kesehatan yang menyediakan alat kesehatan. Dengan dukungan merek-merek terpercaya, kami berkomitmen untuk menyediakan produk-produk berkualitas tinggi guna meningkatkan mutu layanan kesehatan di Indonesia.
         </p>
         <div class="mt-8 grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
-            @foreach($produks as $produk)
+            @foreach($categorys as $category)
             <div class="relative bg-white rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                <img src="{{ asset('storage/' . $produk->thumbnail) }}" alt="{{ $produk->name }} Image" class="w-full h-56 object-cover">
+                <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }} Image" class="w-full h-56 object-cover">
                 <div class="absolute inset-0 flex items-end justify-start p-6 bg-black bg-opacity-10">
                     <div class="text-left">
-                        <h3 class="text-xl font-semibold text-white">{{ $produk->name }}</h3>
-                        <p class="mt-2 text-white">{{ $produk->description }}</p>
+                        <h3 class="text-xl font-semibold text-white">{{ $category->name }}</h3>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
         <div class="text-center mt-8" data-aos="fade-up">
-            <a href="all_products_page_link" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-gray-700 transition duration-300">View All Products</a>
+            <a href="{{ route('produk') }}" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-gray-700 transition duration-300">View All Products</a>
         </div>
     </div>
 </section>
@@ -228,8 +217,8 @@
                                 $title = $post->title;
                                 $words = explode(' ', $title);
 
-                                if (count($words) > 5) {
-                                    $title = implode(' ', array_slice($words, 0, 5)) . '...';
+                                if (count($words) > 4) {
+                                    $title = implode(' ', array_slice($words, 0, 4)) . '...';
                                 }
                             @endphp
                             {{ $title }}
@@ -261,11 +250,13 @@
                             {!! nl2br(e($firstSentence)) !!}
                         </p>
 
-
                         <a href="{{ route('blog-posts.show', ['title' => $post->title]) }}" class="text-blue-600 hover:underline mt-4 inline-block">Read More</a>
                     </div>
                 </div>
                 @endforeach
+            </div>
+            <div class="text-center mt-8" data-aos="fade-up">
+                <a href="{{ route('blog') }}" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-gray-700 transition duration-300">View All Blog</a>
             </div>
             <!-- Pagination -->
             <div class="swiper-pagination"></div>
@@ -275,6 +266,7 @@
         </div>
     </div>
 </section>
+
 
 
 

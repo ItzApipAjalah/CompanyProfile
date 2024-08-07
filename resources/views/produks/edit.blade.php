@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Produk</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/3a24v2c3w9jjmxd9gzlpop8m08ovlg9xzgi9zsgagf30q7d0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            tinymce.init({
+                selector: '#description',
+                plugins: 'advlist autolink lists link image charmap preview anchor textcolor',
+                toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist | link image',
+                menubar: false,
+                height: 500,
+                setup: function (editor) {
+                    editor.on('change', function () {
+                        editor.save();
+                    });
+                }
+            });
+        });
+    </script>
     <style>
         body {
             background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
@@ -153,10 +170,9 @@
                 </div>
                 <div class="form-group">
                     <label for="category_id">Category:</label>
-                    <select name="category_id">
-                        <option value="{{ $produk->category->id }}" disabled selected>{{ $produk->category->name }}</option>
+                    <select id="category_id" name="category_id" required>
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ $produk->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>

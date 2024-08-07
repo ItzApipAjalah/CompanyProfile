@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Produk</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/3a24v2c3w9jjmxd9gzlpop8m08ovlg9xzgi9zsgagf30q7d0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            tinymce.init({
+                selector: '#description',
+                plugins: 'advlist autolink lists link image charmap preview anchor textcolor',
+                toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist | link image',
+                menubar: false,
+                height: 500,
+                setup: function (editor) {
+                    editor.on('change', function () {
+                        editor.save();
+                    });
+                }
+            });
+        });
+    </script>
     <style>
         body {
             background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
@@ -173,35 +190,59 @@
         @yield('content')
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const fileInput = document.getElementById('fileInput');
-            const inputElement = fileInput.querySelector('input');
+     document.addEventListener('DOMContentLoaded', function () {
+        const fileInput = document.getElementById('fileInput');
+        const inputElement = fileInput.querySelector('input');
+        const imagePreview = document.getElementById('imagePreview');
 
-            fileInput.addEventListener('click', () => {
-                inputElement.click();
-            });
-
-            fileInput.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                fileInput.classList.add('dragover');
-            });
-
-            fileInput.addEventListener('dragleave', () => {
-                fileInput.classList.remove('dragover');
-            });
-
-            fileInput.addEventListener('drop', (e) => {
-                e.preventDefault();
-                fileInput.classList.remove('dragover');
-                inputElement.files = e.dataTransfer.files;
-            });
-
-            inputElement.addEventListener('change', () => {
-                if (inputElement.files.length > 0) {
-                    fileInput.querySelector('span').textContent = inputElement.files[0].name;
-                }
-            });
+        // Handle click event to open file picker
+        fileInput.addEventListener('click', () => {
+            inputElement.click();
         });
+
+        // Prevent default behavior for drag over event
+        fileInput.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fileInput.classList.add('dragover');
+        });
+
+        // Remove dragover class when drag leaves
+        fileInput.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fileInput.classList.remove('dragover');
+        });
+
+        // Handle file drop
+        fileInput.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fileInput.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                inputElement.files = e.dataTransfer.files;
+                fileInput.querySelector('span').textContent = e.dataTransfer.files[0].name;
+                displayImagePreview(e.dataTransfer.files[0]);
+            }
+        });
+
+        // Update label and preview when file is selected
+        inputElement.addEventListener('change', () => {
+            if (inputElement.files.length > 0) {
+                fileInput.querySelector('span').textContent = inputElement.files[0].name;
+                displayImagePreview(inputElement.files[0]);
+            }
+        });
+
+        // Function to display image preview
+        function displayImagePreview(file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreview.innerHTML = `<img src="${e.target.result}" alt="Image Preview" style="max-width: 100%; height: auto;">`;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
     </script>
 </body>
 </html>

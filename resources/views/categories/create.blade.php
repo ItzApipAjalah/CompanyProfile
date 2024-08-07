@@ -9,6 +9,10 @@
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" class="form-control" required value="{{ old('name') }}">
         </div>
+        <div class="form-group mb-4">
+            <label for="image" class="block text-gray-700">Image:</label>
+            <input type="file" name="image" id="image" class="form-control">
+        </div>
         <button type="submit" class="submit-button">Add Category</button>
     </form>
 </main>

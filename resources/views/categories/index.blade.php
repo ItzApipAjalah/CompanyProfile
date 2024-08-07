@@ -16,6 +16,7 @@
             <thead>
                 <tr>
                     <th>Nama Category</th>
+                    <th>Thumbnail</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -23,8 +24,13 @@
                 @foreach($categories as $category)
                     <tr>
                         <td>{{ $category->name }}</td>
+                        <td>
+                            <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" width="100">
+
+                        </td>
                         <td class="action-buttons">
                             <a href="{{ route('categories.edit', $category) }}" class="text-blue-500 hover:text-blue-700 transition duration-200">Edit</a>
+
                             <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

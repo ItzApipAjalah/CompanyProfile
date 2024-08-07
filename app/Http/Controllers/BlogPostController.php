@@ -24,7 +24,7 @@ class BlogPostController extends Controller
     $request->validate([
         'title' => 'required|max:255',
         'content' => 'required',
-        'image' => 'image|nullable|max:10000'
+        'image' => 'image|nullable'
     ]);
 
     $content = $request->input('content');
@@ -68,7 +68,7 @@ class BlogPostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
-            'image' => 'image|nullable|max:10000'
+            'image' => 'image|nullable'
         ]);
 
         $post = BlogPost::findOrFail($id);

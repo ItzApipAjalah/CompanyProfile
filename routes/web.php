@@ -25,12 +25,14 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 
-Route::get('/blog', [App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
+Route::get('/semua-blog', [App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
+Route::get('/semua-produk', [App\Http\Controllers\HomeController::class, 'produks'])->name('produk');
 
 // login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::get('blog-posts/{title}', [BlogPostController::class, 'show'])->name('blog-posts.show');
 // admin
 Route::middleware(['auth:admin'])->group(function () {

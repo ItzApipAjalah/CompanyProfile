@@ -161,10 +161,9 @@
         <div id="mobile-menu" class="hidden lg:hidden">
             <nav class="flex flex-col items-center space-y-4 bg-transparent text-white p-4">
                 <a href="{{ route('profile') }}" class="hover:text-blue-400">Profile</a>
-                <a href="#products" id="scroll-produk" class="hover:text-blue-400">Products</a>
-                <a href="#blog" id="scroll-blog" class="hover:text-blue-400">Blog</a>
+                <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-blue-400">Products</a>
+                <a href="{{ route('blog') }}" id="scroll-blog" class="hover:text-blue-400">Blog</a>
                 <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-blue-400">Contact</a>
-                <a href="#get-started" class="inline-block bg-blue-950 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">Get Started</a>
             </nav>
         </div>
     </header>
@@ -206,9 +205,6 @@
         </div>
     </div>
 </section>
-
-
-
     <script>
         AOS.init();
 

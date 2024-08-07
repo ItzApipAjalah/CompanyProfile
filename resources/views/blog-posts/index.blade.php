@@ -2,7 +2,7 @@
 @section('content')
 <main class="main-content container mx-auto p-6">
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-3xl font-semibold text-gray-800">Produk List</h2>
+        <h2 class="text-3xl font-semibold text-gray-800">Blog List</h2>
         <a href="{{ route('blog-posts.create') }}" class="bg-blue-500 text-white py-2 px-4 rounded-md shadow hover:bg-blue-600 transition duration-300 ease-in-out">Add New Produk</a>
     </div>
 

@@ -17,6 +17,7 @@
             @error('thumbnail')
                 <span class="error-message">{{ $message }}</span>
             @enderror
+            <div id="imagePreview" style="margin-top: 10px;"></div>
         </div>
         <div class="form-group">
             <label for="description">Description:</label>

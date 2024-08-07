@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -22,11 +23,18 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories,name',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
 
         $category = new Category();
         $category->name = $request->name;
-        $category->slug = \Str::slug($request->name);
+        $category->slug = Str::slug($request->name);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('category_thumbnail', 'public');
+            $category->image = $imagePath;
+        }
+
         $category->save();
 
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
@@ -46,10 +54,21 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories,name,' . $category->id,
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
 
         $category->name = $request->name;
-        $category->slug = \Str::slug($request->name);
+        $category->slug = Str::slug($request->name);
+
+        if ($request->hasFile('image')) {
+            // Delete the old image if a new one is uploaded
+            if ($category->image) {
+                \Storage::disk('public')->delete($category->image);
+            }
+            $imagePath = $request->file('image')->store('category_thumbnail', 'public');
+            $category->image = $imagePath;
+        }
+
         $category->save();
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
@@ -57,6 +76,9 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        if ($category->image) {
+            \Storage::disk('public')->delete($category->image);
+        }
         $category->delete();
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }

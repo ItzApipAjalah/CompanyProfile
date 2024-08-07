@@ -131,7 +131,7 @@
         <nav class="hidden lg:flex items-center space-x-6">
             <a href="#about" id="nav-scroll" class="hover:text-blue-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Profile</a>
             <a href="#products" id="scroll-produk" class="hover:text-blue-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Produk</a>
-            <a href="#blog" id="scroll-blog" class="hover:text-blue-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Blog</a>
+            <a href="{{ route('blog') }}" id="scroll-blog" class="hover:text-blue-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Blog</a>
             <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-blue-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Kontak</a>
         </nav>
         <!-- Call-to-Action Button (Hidden on mobile by default) -->
@@ -150,7 +150,7 @@
         <nav class="flex flex-col items-center space-y-4 bg-transparent text-white p-4">
             <a href="#about" id="scroll-about" class="hover:text-blue-400">Profile</a>
             <a href="#products" id="scroll-produk" class="hover:text-blue-400">Produk</a>
-            <a href="#blog" id="scroll-blog" class="hover:text-blue-400">Blog</a>
+            <a href="{{ route('blog') }}" id="scroll-blog" class="hover:text-blue-400">Blog</a>
             <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-blue-400">Kontak</a>
         </nav>
     </div>
