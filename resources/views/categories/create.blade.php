@@ -1,4 +1,4 @@
-@extends('layouts.all.layout')
+@extends('layouts.admin.index')
 @section('content')
 
 <main class="main-content container mx-auto">
@@ -13,7 +13,7 @@
             <label for="image" class="block text-gray-700">Image:</label>
             <input type="file" name="image" id="image" class="form-control">
         </div>
-        <button type="submit" class="submit-button">Add Category</button>
+        <button type="submit" class="btn btn-primary">Add Category</button>
     </form>
 </main>
 @endsection

@@ -1,149 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Produk</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .navbar {
-            background: #ffffff;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .navbar-content {
-            padding: 1rem;
-        }
-        .navbar h1 {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: #333;
-        }
-        .navbar a {
-            color: #4f46e5;
-            text-decoration: none;
-            margin-right: 1rem;
-            font-weight: 600;
-        }
-        .navbar a.active {
-            border-bottom: 2px solid #4f46e5;
-        }
-        .main-content {
-            padding: 2rem;
-        }
-        .card {
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        .card h2 {
-            font-size: 2rem;
-            color: #333;
-        }
-        .button {
-            background: #4f46e5;
-            color: #ffffff;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: background-color 0.3s ease;
-        }
-        .button:hover {
-            background: #4338ca;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+@extends('layouts.admin.index')
 
-        .form-group label {
-            display: block;
-            font-size: 0.875rem;
-            color: #4b5563;
-            margin-bottom: 0.5rem;
-        }
+@section('content')
+<main class="container mt-5">
+    <h2 class="h3 mb-4">Edit Team</h2>
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            background: #ffffff;
-        }
+    <form action="{{ route('profiles.update', $profile->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <div class="form-group mb-3">
+            <label for="tentang" class="form-label">Tentang:</label>
+            <textarea id="tentang" name="tentang" class="form-control resizable-textarea" rows="4" required>{{ $profile->tentang }}</textarea>
+        </div>
+        <div class="form-group mb-3">
+            <label for="visi" class="form-label">Visi:</label>
+            <textarea id="visi" name="visi" class="form-control resizable-textarea" rows="4" required>{{ $profile->visi }}</textarea>
+        </div>
+        <div class="form-group mb-3">
+            <label for="misi" class="form-label">Misi:</label>
+            <textarea id="misi" name="misi" class="form-control resizable-textarea" rows="4" required>{{ $profile->misi }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Team</button>
+    </form>
+</main>
+@endsection
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .submit-button {
-            background: #4f46e5;
-            color: #ffffff;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .submit-button:hover {
-            background: #4338ca;
-        }
-        .error-message {
-            color: #ef4444;
-            font-size: 0.875rem;
-        }
-    </style>
-</head>
-<body class="bg-gray-100">
-    <div class="min-h-screen flex flex-col">
-        <!-- Navbar -->
-        <nav class="navbar shadow-md">
-            <div class="navbar-content flex justify-between items-center">
-                <h1>Edit Produk</h1>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <input type="hidden" name="role" value="admin">
-                    <button type="submit" class="button bg-red-500 hover:bg-red-600">Logout</button>
-                </form>
-            </div>
-            <div class="bg-gray-50 border-t border-gray-200">
-                <div class="container mx-auto flex space-x-4 p-4">
-                    <a href="{{ route('admin.dashboard') }}" class="text-gray-600 hover:text-gray-900 transition duration-200">Dashboard</a>
-                </div>
-            </div>
-        </nav>
-        <!-- Main Content -->
-        <main class="main-content container mx-auto">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-6">Edit team</h2>
-
-            <form action="{{ route('profiles.update', $profile->id) }}" method="POST" enctype="multipart/form-data" >
-                @csrf
-                @method('PUT')
-                <div class="form-group" >
-                    <label for="tentang">Tentang:</label>
-                    <textarea id="tentang" name="tentang"  rows="4" required>{{ $profile->tentang }}</textarea>
-                </div>
-                <div class="form-group" >
-                    <label for="visi">Visi:</label>
-                    <textarea id="visi" name="visi"  rows="4" required>{{ $profile->visi }}</textarea>
-                </div>
-                <div class="form-group" >
-                    <label for="misi">Misi:</label>
-                    <textarea id="misi" name="misi"  rows="4" required>{{ $profile->misi }}</textarea>
-                </div>
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md shadow hover:bg-blue-600">Update Team</button>
-            </form>
-
-        </main>
-    </div>
-</body>
-</html>
+@section('style')
+<style>
+/* Make textareas resizable with a minimum height */
+.resizable-textarea {
+    resize: vertical; /* Allows resizing vertically */
+    height: 100px;
+}
+</style>
+@endsection

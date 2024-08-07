@@ -1,27 +1,29 @@
-@extends('layouts.produk.table_main')
+@extends('layouts.admin.index')
 @section('content')
-<main class="main-content container mx-auto p-6">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-3xl font-semibold text-gray-800">category List</h2>
-        <a href="{{ route('categories.create') }}" class="bg-blue-500 text-white py-2 px-4 rounded-md shadow hover:bg-blue-600 transition duration-300 ease-in-out">Add New Category</a>
-    </div>
 
-    @if (session('success'))
-        <div class="bg-green-100 text-green-700 p-4 rounded-lg mb-6">
-            {{ session('success') }}
+<div class="main-panel">
+
+    <div class="content-wrapper">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h3">Category List</h2>
+            <a href="{{ route('categories.create') }}" class="btn btn-primary">Add New Category</a>
         </div>
-    @endif
-    <div class="table-wrapper">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nama Category</th>
-                    <th>Thumbnail</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($categories as $category)
+      <div class="row">
+        <div class="col-lg-6 grid-margin stretch-card table">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Manage Category</h4>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                        <th>Nama Category</th>
+                        <th>Thumbnail</th>
+                        <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($categories as $category)
                     <tr>
                         <td>{{ $category->name }}</td>
                         <td>
@@ -29,20 +31,25 @@
 
                         </td>
                         <td class="action-buttons">
-                            <a href="{{ route('categories.edit', $category) }}" class="text-blue-500 hover:text-blue-700 transition duration-200">Edit</a>
+                            <a href="{{ route('categories.edit', $category) }}" class="btn btn-warning">Edit</a>
 
                             <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:text-red-700 transition duration-200">Delete</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</main>
+                     @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
 
 
 @endsection
