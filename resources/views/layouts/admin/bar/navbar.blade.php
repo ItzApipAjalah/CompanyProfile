@@ -1,19 +1,20 @@
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-      <div class="me-3">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
-          <span class="icon-menu"></span>
-        </button>
+        <div class="me-3">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
+            <span class="icon-menu"></span>
+          </button>
+        </div>
+        <div>
+          <a class="navbar-brand brand-logo" >
+            <span class="logo-text">Admin<span class="logo-admin">Panel</span></span>
+          </a>
+          <a class="navbar-brand brand-logo-mini">
+            <img src="{{ asset('assets/images/logo-mini.svg') }}" alt="logo" />
+          </a>
+        </div>
       </div>
-      <div>
-        <a class="navbar-brand brand-logo" href="index.html">
-          <img src="{{ asset('assets/images/logo.svg') }}" alt="logo" />
-        </a>
-        <a class="navbar-brand brand-logo-mini" href="index.html">
-          <img src="{{ asset('assets/images/logo-mini.svg') }}" alt="logo" />
-        </a>
-      </div>
-    </div>
+
     <div class="navbar-menu-wrapper d-flex align-items-top">
 
       <ul class="navbar-nav ms-auto">
@@ -106,21 +107,29 @@
           </div>
         </li> --}}
         <li class="nav-item dropdown d-none d-lg-block user-dropdown">
-          <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="img-xs rounded-circle" src="{{ asset('assets/images/logo-mini.svg') }}" alt="Profile image"> </a>
-          <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-            <div class="dropdown-header text-center">
-              <img class="img-md rounded-circle" src="{{ asset('assets/images/logo-mini.svg') }}" alt="Profile image">
-              <p class="mb-1 mt-3 fw-semibold">Allen Moreno</p>
-              <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+            <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- Profile image container with dynamic background color and text -->
+                <div class="profile-image d-inline-flex align-items-center justify-content-center rounded-circle text-white fw-bold" style="width: 40px; height: 40px;">
+                    {{ strtoupper(substr($admin->name, 0, 1)) }}
+                </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                <div class="dropdown-header text-center">
+                    <!-- Profile image container with dynamic background color and text -->
+                    <div class="profile-image d-inline-flex align-items-center justify-content-center rounded-circle text-white fw-bold" style="width: 80px; height: 80px;">
+                        {{ strtoupper(substr($admin->name, 0, 1)) }}
+                    </div>
+                    <p class="mb-1 mt-3 fw-semibold">{{ $admin->name }}</p>
+                    <p class="fw-light text-muted mb-0">{{ $admin->email }}</p>
+                </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <input type="hidden" name="role" value="admin">
+                    <button type="submit" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</button>
+                </form>
             </div>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <input type="hidden" name="role" value="admin">
-                <button type="submit" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</button>
-            </form>
-          </div>
         </li>
+
       </ul>
       <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
         <span class="mdi mdi-menu"></span>

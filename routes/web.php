@@ -9,6 +9,8 @@ use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\TestEmailController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,8 @@ use App\Http\Controllers\BlogPostController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/test-email', [TestEmailController::class, 'sendTestEmail']);
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -29,8 +33,11 @@ Route::get('/semua-blog', [App\Http\Controllers\HomeController::class, 'blog'])-
 Route::get('/semua-produk', [App\Http\Controllers\HomeController::class, 'produks'])->name('produk');
 
 // login
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('redirect_if_authenticated:admin')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+
+});
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('blog-posts/{title}', [BlogPostController::class, 'show'])->name('blog-posts.show');

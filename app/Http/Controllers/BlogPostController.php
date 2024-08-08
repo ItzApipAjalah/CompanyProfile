@@ -5,18 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 
 class BlogPostController extends Controller
 {
     public function index()
     {
         $posts = BlogPost::all();
-        return view('blog-posts.index', compact('posts'));
+        $admin = auth()->user();
+        return view('blog-posts.index', compact('posts', 'admin'));
     }
 
     public function create()
     {
-        return view('blog-posts.create');
+        $admin = auth()->user();
+        return view('blog-posts.create' , compact('admin'));
     }
 
     public function store(Request $request)
@@ -59,7 +63,8 @@ class BlogPostController extends Controller
     public function edit($id)
     {
         $post = BlogPost::find($id);
-        return view('blog-posts.edit', compact('post'));
+        $admin = auth()->user();
+        return view('blog-posts.edit', compact('post', 'admin'));
     }
 
     public function update(Request $request, $id)

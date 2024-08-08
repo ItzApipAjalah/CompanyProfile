@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Category;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -12,13 +14,15 @@ class ProductController extends Controller
     {
         $produks = Produk::with('category')->get();
         $categories = Category::with('produks')->get();
-        return view('produks.index', compact('produks' , 'categories'));
+        $admin = auth()->user();
+        return view('produks.index', compact('produks' , 'categories', 'admin'));
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('produks.create', compact('categories'));
+        $admin = auth()->user();
+        return view('produks.create', compact('categories', 'admin'));
     }
 
     public function store(Request $request)
@@ -50,7 +54,8 @@ class ProductController extends Controller
     public function edit(Produk $produk)
     {
         $categories = Category::all();
-        return view('produks.edit', compact('produk', 'categories'));
+        $admin = auth()->user();
+        return view('produks.edit', compact('produk', 'categories', 'admin'));
     }
 
     public function update(Request $request, Produk $produk)

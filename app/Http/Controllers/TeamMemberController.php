@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Team;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 
 class TeamMemberController extends Controller
 {
@@ -16,8 +18,9 @@ class TeamMemberController extends Controller
     public function index()
     {
         $teams = Team::all();
+        $admin = auth()->user();
         $profiles = Profile::all();
-        return view('teams.index', compact('teams', 'profiles'));
+        return view('teams.index', compact('teams', 'profiles' , 'admin'));
     }
 
     /**
@@ -27,7 +30,8 @@ class TeamMemberController extends Controller
      */
     public function create()
     {
-        return view('teams.create');
+        $admin = auth()->user();
+        return view('teams.create', compact('admin'));
     }
 
     /**
@@ -69,7 +73,8 @@ class TeamMemberController extends Controller
      */
     public function edit(Team $team)
     {
-        return view('teams.edit', compact('team'));
+        $admin = auth()->user();
+        return view('teams.edit', compact('team' , 'admin'));
     }
 
     /**

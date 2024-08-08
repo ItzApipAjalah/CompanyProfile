@@ -279,9 +279,9 @@
         <p class="mt-4 text-lg text-center text-gray-600">Kami ingin mendengar kabar dari Anda. Hubungi kami untuk informasi lebih lanjut.</p>
 
         <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Contact Form -->
             <div class="bg-white p-8 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:shadow-lg hover:-translate-y-1">
-                <form action="#" method="POST">
+                <form action="{{ route('contact.submit') }}" method="POST">
+                    @csrf
                     <div class="mb-5">
                         <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
                         <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-4 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out" required>

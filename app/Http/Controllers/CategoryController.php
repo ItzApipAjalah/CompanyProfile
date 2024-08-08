@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Str;
-
+use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 class CategoryController extends Controller
 {
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        $admin = auth()->user();
+        return view('categories.index', compact('categories' ,'admin'));
     }
 
     public function create()
     {
-        return view('categories.create');
+        $admin = auth()->user();
+        return view('categories.create' , compact('admin'));
     }
 
     public function store(Request $request)
@@ -47,7 +50,8 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('categories.edit', compact('category'));
+        $admin = auth()->user();
+        return view('categories.edit', compact('category', 'admin'));
     }
 
     public function update(Request $request, Category $category)

@@ -25,7 +25,27 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
     <script src="https://cdn.tiny.cloud/1/3a24v2c3w9jjmxd9gzlpop8m08ovlg9xzgi9zsgagf30q7d0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <style>
+    .profile-image {
+        background-color: #1f3bb3; /* You can choose a different color */
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1;
+    }
+    .logo-text {
+        font-weight: bold;
+        color: black; /* Adjust color as needed */
+        font-size: 1.5rem; /* Adjust font size as needed */
+    }
 
+    .logo-admin {
+        color: #1f3bb3; /* Admin text color */
+        font-weight: bold; /* Adjust if needed */
+        font-size: 1.5rem; /* Adjust font size as needed */
+    }
+    </style>
     @yield('script')
     @yield('style')
   </head>
