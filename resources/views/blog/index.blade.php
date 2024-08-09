@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" />
+    <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>Blog Post - {{ $post->title }}</title>
@@ -100,8 +101,8 @@
         }
 
         header.scrolled {
-            background-color: rgba(17,24,39, 0.9);
-            box-shadow: 0 4px 6px rgba(17,24,39, 0.1);
+            background-color: rgba(1, 36, 34, 0.945);
+            box-shadow: 0 4px 6px rgba(1, 36, 34, 0.5);
         }
 
         body {
@@ -113,7 +114,7 @@
         }
 
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.ibb.co/w40C2BG/medical-equipment-mrb88uk4se3ksu.png') center/cover no-repeat;
+            background: linear-gradient(rgba(4, 47, 46, 0.6), rgba(4, 47, 46, 0.6)), url('https://i.ibb.co.com/SBR2x5D/1685488925-en-idei-club-p-medica.png') center/cover no-repeat;
         }
 
         .hero-section h1 {
@@ -144,10 +145,10 @@
                 <a class="text-2xl font-bold tracking-widest" href="{{ route('home') }}">BIOSTARK</a>
             </div>
             <nav class="hidden lg:flex items-center space-x-6">
-                <a href="{{ route('profile') }}" class="hover:text-blue-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Profile</a>
-                <a href="#products" id="scroll-produk" class="hover:text-blue-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Products</a>
-                <a href="#blog" id="scroll-blog" class="hover:text-blue-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Blog</a>
-                <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-blue-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Contact</a>
+                <a href="{{ route('profile') }}" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Profile</a>
+                <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Products</a>
+                <a href="{{ route('blog') }}" id="scroll-blog" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Blog</a>
+                <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Contact</a>
             </nav>
             <a href="#get-started" class="hidden lg:inline-block ml-4 bg-blue-950 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition" style="visibility: hidden;">Get Started</a>
             <div class="lg:hidden flex items-center">
@@ -160,10 +161,10 @@
         </div>
         <div id="mobile-menu" class="hidden lg:hidden">
             <nav class="flex flex-col items-center space-y-4 bg-transparent text-white p-4">
-                <a href="{{ route('profile') }}" class="hover:text-blue-400">Profile</a>
-                <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-blue-400">Products</a>
-                <a href="{{ route('blog') }}" id="scroll-blog" class="hover:text-blue-400">Blog</a>
-                <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-blue-400">Contact</a>
+                <a href="{{ route('profile') }}" class="hover:text-teal-400">Profile</a>
+                <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-teal-400">Products</a>
+                <a href="{{ route('blog') }}" id="scroll-blog" class="hover:text-teal-400">Blog</a>
+                <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-teal-400">Contact</a>
             </nav>
         </div>
     </header>
@@ -183,11 +184,12 @@
 
 <!-- Blog Post Detail Section -->
 <section id="content" class="bg-gray-100 py-16">
-    <div class="container mx-auto px-6">
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden" data-aos="fade-up">
-            <img src="{{ asset('storage/images/' . $post->image) }}" alt="{{ $post->title }}" class="w-full h-80 object-cover">
-            <div class="p-6">
-                <h2 class="text-3xl font-bold text-gray-800">{{ $post->title }}</h2>
+    <div class="w-full px-0">
+        <div class="bg-white shadow-lg rounded-none overflow-hidden" data-aos="fade-up">
+            <div class="p-4 lg:p-6">
+            <img src="{{ asset('storage/images/' . $post->image) }}" alt="{{ $post->title }}" class="w-fullobject-cover">
+
+                <h2 class="text-2xl lg:text-3xl font-bold text-gray-800">{{ $post->title }}</h2>
 
                 <div class="mt-2 text-gray-500">
                     @php
@@ -205,6 +207,7 @@
         </div>
     </div>
 </section>
+
     <script>
         AOS.init();
 

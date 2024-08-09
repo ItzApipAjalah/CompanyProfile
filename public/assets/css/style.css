@@ -28790,7 +28790,7 @@ dl li {
   .sidebar-offcanvas {
     position: fixed;
     max-height: calc(100vh - 97px);
-    top: 97px;
+    top: 80.1px;
     bottom: 0;
     overflow: auto;
     right: -220px;

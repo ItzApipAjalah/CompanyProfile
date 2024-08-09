@@ -14,6 +14,12 @@ class ProfileController extends Controller
         return view('profile.edit', compact('profile' , 'admin'));
     }
 
+    public function index()
+    {
+        $admin = auth()->user();
+        $profiles = Profile::all();
+        return view('profile.index', compact('profiles' , 'admin'));
+    }
     public function update(Profile $profile) {
         $data = request()->validate([
             'tentang' => 'required|string',
@@ -23,6 +29,6 @@ class ProfileController extends Controller
 
         $profile->update($data);
 
-        return redirect()->route('teams.index')->with('success', 'Profile updated successfully.');
+        return redirect()->route('profiles.index')->with('success', 'Profile updated successfully.');
     }
 }

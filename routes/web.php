@@ -29,6 +29,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 
+Route::get('/category/{name}', [ProductController::class, 'showCategoryProducts'])->name('category.products');
+
 Route::get('/semua-blog', [App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
 Route::get('/semua-produk', [App\Http\Controllers\HomeController::class, 'produks'])->name('produk');
 
@@ -61,6 +63,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/admin/teams/{team}', [TeamMemberController::class, 'update'])->name('teams.update');
     Route::delete('/admin/teams/{team}', [TeamMemberController::class, 'destroy'])->name('teams.destroy');
 
+    route::get('/admin/profiles', [ProfileController::class, 'index'])->name('profiles.index');
     Route::get('/admin/profiles/{profile}/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
     Route::put('/admin/profiles/{profile}', [ProfileController::class, 'update'])->name('profiles.update');
 
@@ -80,4 +83,5 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/blog-posts/{id}/edit', [BlogPostController::class, 'edit'])->name('blog-posts.edit');
     Route::put('/admin/blog-posts/{id}', [BlogPostController::class, 'update'])->name('blog-posts.update');
     Route::delete('/admin/blog-posts/{id}', [BlogPostController::class, 'destroy'])->name('blog-posts.destroy');
+
 });

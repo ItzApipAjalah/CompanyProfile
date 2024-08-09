@@ -7,9 +7,18 @@ use App\Models\Produk;
 use App\Models\Category;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    public function showCategoryProducts($name)
+    {
+        $category = Category::where('name', $name)->firstOrFail();
+        $produks = Produk::where('category_id', $category->id)->get();
+        return view('category', compact('category', 'produks'));
+    }
+
+
     public function index()
     {
         $produks = Produk::with('category')->get();

@@ -27,11 +27,19 @@
           <span class="menu-title">Manage Blog</span>
         </a>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('teams.index') }}">
+        <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
           <i class="menu-icon mdi mdi-account-circle-outline"></i>
-          <span class="menu-title">Manage Profile</span>
+          <span class="menu-title">Profile Manager</span>
+          <i class="menu-arrow"></i>
         </a>
+        <div class="collapse" id="form-elements">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{ route('profiles.index') }}">Manage Profile</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('teams.index') }}">Manage struktur</a></li>
+          </ul>
+        </div>
       </li>
       <li class="nav-item">
         <form method="POST" action="{{ route('logout') }}">

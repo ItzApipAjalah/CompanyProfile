@@ -42,7 +42,7 @@
     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-gray-900"></div>
     <!-- Hero Content -->
     <div class="relative z-10 text-center px-6 py-12 md:px-12 md:py-24">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Produk yang tersedia di <span class="text-teal-500">biostark</span></h1>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Produk <span class="text-teal-500">{{ $category->name }}</span></h1>
         <!-- Scroll Down Animation -->
         <a href="#products" id="scroll-to-products" class="mt-8 inline-block" >
             <svg class="w-12 h-12 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -58,33 +58,28 @@
 <!-- Products Section -->
 <section id="products" class="bg-gray-100 py-16" data-aos="fade-up">
     <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center text-gray-800">Semua produk biostark</h2>
-        <p class="mt-4 text-lg text-center text-gray-700">
-            Menawarkan produk-produk yang aman dan efektif. Dengan dukungan dari merek-merek terpercaya, kami berkomitmen untuk meningkatkan kesehatan masyarakat melalui penyediaan obat dan vaksin berkualitas tinggi.
-        </p>
+        <h2 class="text-3xl font-bold text-center text-gray-800">Produk {{ $category->name }}</h2>
 
-        @foreach($categories as $category)
-            <div class="mt-12">
-                <h3 class="text-2xl font-semibold text-gray-800">{{ $category->name }}</h3>
-                <div class="mt-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    @foreach($category->produks as $produk)
-                        <div class="relative bg-white rounded-lg overflow-hidden shadow-lg cursor-pointer"
-                             onclick="showProductModal('{{ $produk->name }}', '{{ asset('storage/' . $produk->thumbnail) }}', `{!! addslashes($produk->description) !!}`)"
-                             data-aos="fade-up" data-aos-delay="{{ $loop->parent->index * 100 }}">
-                            <img src="{{ asset('storage/' . $produk->thumbnail) }}" alt="{{ $produk->name }} Image" class="w-full h-56 object-cover">
-                            <div class="absolute inset-0 flex items-end justify-start p-6 bg-black bg-opacity-50">
-                                <div class="text-left">
-                                    <h3 class="text-xl font-semibold text-white">{{ $produk->name }}</h3>
-                                    <p class="mt-2 text-white">{{ $produk->category->name }}</p>
-                                </div>
-                            </div>
+
+        <div class="mt-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            @forelse($produks as $produk)
+                <div class="relative bg-white rounded-lg overflow-hidden cursor-pointer"
+                     onclick="showProductModal('{{ $produk->name }}', '{{ asset('storage/' . $produk->thumbnail) }}', `{!! addslashes($produk->description) !!}`)"
+                     data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <img src="{{ asset('storage/' . $produk->thumbnail) }}" alt="{{ $produk->name }} Image" class="w-full h-56 object-cover">
+                    <div class="absolute inset-0 flex items-end justify-start p-6 bg-black bg-opacity-10">
+                        <div class="text-left">
+                            <h3 class="text-xl font-semibold text-white">{{ $produk->name }}</h3>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @empty
+                <p class="text-gray-600">Tidak ada produk dalam kategori ini.</p>
+            @endforelse
+        </div>
     </div>
 </section>
+
 
 <!-- Modal Structure -->
 <div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden transition-opacity duration-300 ease-out opacity-0">
@@ -107,23 +102,27 @@
 
 
 
+
+
+
 @endsection
 
 @section('script')
 <script>
     function showProductModal(name, thumbnail, description) {
         const modal = document.getElementById('productModal');
+        const modalContent = modal.querySelector('div');
 
         document.getElementById('modalName').textContent = name;
         document.getElementById('modalThumbnail').src = thumbnail;
         document.getElementById('modalDescription').innerHTML = description;
-        document.getElementById('modalWhatsappButton').href = `https://wa.me/?text=Hi,%20I'm%20interested%20in%20${name}`;
+        document.getElementById('modalWhatsappButton').href = `https://wa.me/6281380568978?text=Halo,%20Aku%20tertarik%20dengan%20Produk%20ini%20 ( ${name} )`;
 
         modal.classList.remove('hidden');
         setTimeout(() => {
             modal.classList.remove('opacity-0', 'scale-95');
             modal.classList.add('opacity-100', 'scale-100');
-        }, 10);
+        }, 10); // Slight delay to allow class change to take effect
 
         document.getElementById('modalClose').onclick = function() {
             closeProductModal();
@@ -142,9 +141,12 @@
         modal.classList.add('opacity-0', 'scale-95');
         setTimeout(() => {
             modal.classList.add('hidden');
-        }, 300);
+        }, 300); // Match the duration with the CSS transition duration
     }
 </script>
+
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const header = document.querySelector('header');

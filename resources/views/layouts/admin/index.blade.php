@@ -46,7 +46,6 @@
         font-size: 1.5rem; /* Adjust font size as needed */
     }
     </style>
-    @yield('script')
     @yield('style')
   </head>
   <body class="with-welcome-text">
@@ -87,5 +86,7 @@
 
     <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
     <!-- End custom js for this page-->
+    @yield('script')
+
   </body>
 </html>
