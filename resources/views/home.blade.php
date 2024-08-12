@@ -9,13 +9,23 @@
         </div>
         <!-- Navigation Links (Hidden on mobile by default) -->
         <nav class="hidden lg:flex items-center space-x-6">
-            <a href="{{ route('profile') }}" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Profile</a>
-            <a href="#products" id="scroll-produk" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Produk</a>
-            <a href="#blog" id="scroll-blog" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Blog</a>
-            <a href="#contact" id="scroll-contact" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Kontak</a>
+            <a href="{{ route('profile') }}" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.about_us')</a>
+            <a href="#products" id="scroll-produk" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.products_title')</a>
+            <a href="#blog" id="scroll-blog" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.blog_title')</a>
+            <a href="#contact" id="scroll-contact" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.contact_us')</a>
         </nav>
-        <!-- Call-to-Action Button (Hidden on mobile by default) -->
-        <a href="#get-started" class="hidden lg:inline-block ml-4 bg-blue-950 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition" style="visibility: hidden;" >Get Started</a>
+        <!-- Dropdown for "Get Started" Button and Language Switcher -->
+        <div class="relative">
+            <button id="dropdown-button" class="hidden lg:inline-block ml-4 bg-teal-900 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                @lang('home.leanguage')
+            </button>
+            <div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg hidden">
+                <div class="p-2">
+                    <a href="{{ route('language.switch', 'en') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">English</a>
+                    <a href="{{ route('language.switch', 'id') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">Indonesian</a>
+                </div>
+            </div>
+        </div>
         <!-- Burger Menu Icon -->
         <div class="lg:hidden flex items-center">
             <button id="burger-menu-button" class="focus:outline-none">
@@ -28,12 +38,25 @@
     <!-- Mobile Navigation Menu -->
     <div id="mobile-menu" class="hidden lg:hidden">
         <nav class="flex flex-col items-center space-y-4 bg-transparent text-white p-4">
-            <a href="{{ route('profile') }}" class="hover:text-teal-400">Profile</a>
-            <a href="#products" id="scroll-produk" class="hover:text-teal-400">Produk</a>
-            <a href="#blog" id="scroll-blog" class="hover:text-teal-400">Blog</a>
-            <a href="#contact" id="scroll-contact" class="hover:text-teal-400">Kontak</a>
+            <a href="{{ route('profile') }}" class="hover:text-teal-400">@lang('home.about_us')</a>
+            <a href="#products" id="scroll-produk" class="hover:text-teal-400">@lang('home.products_title')</a>
+            <a href="#blog" id="scroll-blog" class="hover:text-teal-400">@lang('home.blog_title')</a>
+            <a href="#contact" id="scroll-contact" class="hover:text-teal-400">@lang('home.contact_us')</a>
+            <!-- Dropdown for Language Switcher -->
+            <div class="relative mt-4">
+                <button id="mobile-dropdown-button" class="bg-teal-900 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                    @lang('home.leanguage')
+                </button>
+                <div id="mobile-dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg hidden">
+                    <div class="p-2">
+                        <a href="{{ route('language.switch', 'en') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">English</a>
+                        <a href="{{ route('language.switch', 'id') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">Indonesian</a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </div>
+
 </header>
 <!-- Hero Section -->
 <section class="relative h-screen flex items-center justify-center overflow-hidden bg-teal-900" style="background-image: url('https://i.ibb.co.com/SBR2x5D/1685488925-en-idei-club-p-medica.png'); background-size: cover; background-position: center;" data-aos="fade-up">
@@ -41,9 +64,9 @@
     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-gray-900"></div>
     <!-- Hero Content -->
     <div class="relative z-10 text-center px-6 py-12 md:px-12 md:py-24">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Selamat Datang Di <span class="text-teal-500">biostark</span></h1>
-        <p class="mt-4 text-lg md:text-2xl text-gray-200">Kami menyediakan obat-obatan dan vaksin untuk meningkatkan kesehatan masyarakat, dengan fokus pada produk yang aman dan efektif.</p>
-        <a href="{{ route('profile') }}" class="mt-8 inline-block bg-teal-900 hover:bg-teal-800 text-white py-3 px-8 md:px-12 rounded-full shadow-lg transition-transform transform hover:scale-105">Tentang Kami</a>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">@lang('home.welcome') <span class="text-teal-500">biostark</span></h1>
+        <p class="mt-4 text-lg md:text-2xl text-gray-200">@lang('home.subtitle')</p>
+        <a href="{{ route('profile') }}" class="mt-8 inline-block bg-teal-900 hover:bg-teal-800 text-white py-3 px-8 md:px-12 rounded-full shadow-lg transition-transform transform hover:scale-105">@lang('home.about_us')</a>
     </div>
     <!-- Optional: Add a subtle decorative element like a wave or abstract shape -->
     <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" fill="#011716">
@@ -54,24 +77,24 @@
 <!-- Products Section -->
 <section id="products" class="bg-gray-100 py-16" data-aos="fade-up">
     <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center text-gray-800">Kategori Produk</h2>
+        <h2 class="text-3xl font-bold text-center text-gray-800">@lang('home.products_title')</h2>
         <p class="mt-4 text-lg text-center text-gray-700">
-            Kami adalah distributor obat-obatan dan vaksin, menawarkan produk-produk yang aman dan efektif. Dengan dukungan dari merek-merek terpercaya, kami berkomitmen untuk meningkatkan kesehatan masyarakat melalui penyediaan obat dan vaksin berkualitas tinggi.
+            @lang('home.products_subtitle')
         </p>
 
-        @if($categorys->isEmpty())
+        @if($produks->isEmpty())
             <div class="mt-8 text-center text-gray-600">
-                <p>Belum ada produk yang tersedia saat ini. Silakan kembali lagi nanti.</p>
+                <p>@lang('home.products_empty')</p>
             </div>
         @else
             <div class="mt-8 grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
-                @foreach($categorys as $category)
-                <a href="{{ route('category.products', ['name' => Str::slug($category->name)]) }}">
+                @foreach($produks as $produk)
+                <a href="{{ route('product.show', ['id' => $produk->id]) }}">
                 <div class="relative bg-white rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }} Image" class="w-full h-56 object-cover">
+                    <img src="{{ asset('storage/' . $produk->thumbnail) }}" alt="{{ $produk->name }} Image" class="w-full h-56 object-cover">
                     <div class="absolute inset-0 flex items-end justify-start p-6 bg-black bg-opacity-10">
                         <div class="text-left">
-                            <h3 class="text-xl font-semibold text-white">{{ $category->name }}</h3>
+                            <h3 class="text-xl font-semibold text-white">{{ $produk->name }}</h3>
                         </div>
                     </div>
                 </div>
@@ -79,22 +102,23 @@
                 @endforeach
             </div>
             <div class="text-center mt-8" data-aos="fade-up">
-                <a href="{{ route('produk') }}" class="inline-block  text-white px-6 py-3 rounded-lg shadow-lg bg-teal-600 hover:bg-teal-700 transition duration-300">View All Products</a>
+                <a href="{{ route('produk') }}" class="inline-block text-white px-6 py-3 rounded-lg shadow-lg bg-teal-600 hover:bg-teal-700 transition duration-300">@lang('home.view_all_products')</a>
             </div>
         @endif
     </div>
 </section>
 
 
+
 <!-- Blog Section -->
 <section id="blog" class="py-16 bg-gray-200" data-aos="fade-up">
     <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center text-gray-800">Blog Kami</h2>
-        <p class="mt-4 text-lg text-center text-gray-700">Baca postingan dan pembaruan terbaru kami</p>
+        <h2 class="text-3xl font-bold text-center text-gray-800">@lang('home.blog_title')</h2>
+        <p class="mt-4 text-lg text-center text-gray-700">@lang('home.blog_subtitle')</p>
 
         @if($posts->isEmpty())
             <div class="mt-8 text-center text-gray-600">
-                <p>Belum ada postingan blog saat ini. Silakan kembali lagi nanti.</p>
+                <p>@lang('home.blog_empty')</p>
             </div>
         @else
             <!-- Swiper -->
@@ -143,13 +167,13 @@
                                 {!! nl2br(e($firstSentence)) !!}
                             </p>
 
-                            <a href="{{ route('blog-posts.show', ['title' => $post->title]) }}" class="text-blue-600 hover:underline mt-4 inline-block">Read More</a>
+                            <a href="{{ route('blog-posts.show', ['title' => $post->title]) }}" class="text-center mt-4 inline-block bg-teal-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-teal-700 transition duration-300">@lang('home.read_more')</a>
                         </div>
                     </div>
                     @endforeach
                 </div>
                 <div class="text-center mt-8" data-aos="fade-up">
-                    <a href="{{ route('blog') }}" class="inline-block text-white px-6 py-3 rounded-lg shadow-lg bg-teal-600 hover:bg-teal-700 transition duration-300">View All Blog</a>
+                    <a href="{{ route('blog') }}" class="inline-block text-white px-6 py-3 rounded-lg shadow-lg bg-teal-600 hover:bg-teal-700 transition duration-300">@lang('home.view_all_blog')</a>
                 </div>
                 <!-- Pagination -->
                 <div class="swiper-pagination"></div>
@@ -161,14 +185,15 @@
     </div>
 </section>
 
+
 <!-- Contact Section -->
 <section id="contact" class="bg-gray-100 py-16" data-aos="fade-up">
     <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center text-gray-800">Kontak kami</h2>
-        <p class="mt-4 text-lg text-center text-gray-600">Kami ingin mendengar kabar dari Anda. Hubungi kami untuk informasi lebih lanjut.</p>
+        <h2 class="text-3xl font-bold text-center text-gray-800">@lang('home.contact_us')</h2>
+        <p class="mt-4 text-lg text-center text-gray-600">@lang('home.contact_subtitle')</p>
 
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-8 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:shadow-lg hover:-translate-y-1">
+        <div class="mt-12 flex justify-center items-center">
+            <div class="bg-white p-8 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:shadow-lg hover:-translate-y-1 w-full max-w-xl">
                 <!-- Display success or error messages -->
                 @if (session('success'))
                     <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-md">
@@ -203,37 +228,47 @@
                     <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 ease-in-out transform hover:scale-105">Send Message</button>
                 </form>
             </div>
-
-            <!-- Contact Information -->
-            <div class="bg-white p-8 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:shadow-lg hover:-translate-y-1">
-                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Kontak kami</h3>
-                <p class="text-gray-600 mb-4">Silahkan hubungi Kami via Telepon, Whatsapp , Email, atau Form Kontak di samping..</p>
-
-                <div class="mb-5">
-                    <h4 class="text-lg font-medium text-gray-700">Address</h4>
-                    <p class="text-gray-600">Jl keramat, Sukatani Tapos Depok RT 01 RW 10</p>
-                </div>
-
-                <div class="mb-5">
-                    <h4 class="text-lg font-medium text-gray-700">Whatsapp</h4>
-                    <p class="text-gray-600">+62 123-4567-8910</p>
-                </div>
-
-                <div class="mb-5">
-                    <h4 class="text-lg font-medium text-gray-700">Phone</h4>
-                    <p class="text-gray-600">+62 123-4567-8910</p>
-                </div>
-
-                <div class="mb-5">
-                    <h4 class="text-lg font-medium text-gray-700">Email</h4>
-                    <p class="text-gray-600">info@gmail.com</p>
-                </div>
-            </div>
         </div>
     </div>
 </section>
+
+
+
 @endsection
 @section('script')
+<script>
+        // Toggle dropdown menu
+        document.getElementById('dropdown-button').addEventListener('click', function() {
+        var dropdownMenu = document.getElementById('dropdown-menu');
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+        const mobileDropdownMenu = document.getElementById('mobile-dropdown-menu');
+
+        if (mobileDropdownButton && mobileDropdownMenu) {
+            mobileDropdownButton.addEventListener('click', function() {
+                // Toggle visibility of dropdown menu
+                if (mobileDropdownMenu.classList.contains('hidden')) {
+                    mobileDropdownMenu.classList.remove('hidden');
+                } else {
+                    mobileDropdownMenu.classList.add('hidden');
+                }
+            });
+        }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        var isClickInside = document.getElementById('dropdown-button').contains(event.target) ||
+                            document.getElementById('dropdown-menu').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById('dropdown-menu').classList.add('hidden');
+        }
+    });
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const header = document.querySelector('header');

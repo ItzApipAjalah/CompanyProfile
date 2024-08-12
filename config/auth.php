@@ -99,9 +99,9 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_reset_tokens',
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets', // You can use a different table if needed
             'expire' => 60,
             'throttle' => 60,
         ],

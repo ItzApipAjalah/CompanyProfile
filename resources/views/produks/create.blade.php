@@ -25,16 +25,6 @@
             <textarea id="description" name="description" class="form-control" rows="4" required></textarea>
         </div>
 
-        <div class="mb-3">
-            <label for="category_id" class="form-label">Category:</label>
-            <select id="category_id" name="category_id" class="form-select" required>
-                <option value="" disabled selected>Select Category</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
-
         <button type="submit" class="btn btn-primary">Add Produk</button>
     </form>
 </main>

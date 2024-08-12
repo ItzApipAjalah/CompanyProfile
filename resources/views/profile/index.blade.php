@@ -1,8 +1,28 @@
 @extends('layouts.admin.index')
+
 @section('content')
 <main class="container mt-5">
+    <!-- Display error message if available -->
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    <!-- Display success message if available -->
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="h3">Profile Editor</h2>
+    </div>
+
+    <!-- Change Password Button -->
+    <div class="mb-4">
+        <a href="{{ route('admin.password.change') }}" class="btn btn-primary">Change Password</a>
     </div>
 
     <div class="row mb-4">

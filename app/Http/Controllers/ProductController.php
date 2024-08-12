@@ -4,34 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produk;
-use App\Models\Category;
-use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function showCategoryProducts($name)
-    {
-        $category = Category::where('name', $name)->firstOrFail();
-        $produks = Produk::where('category_id', $category->id)->get();
-        return view('category', compact('category', 'produks'));
-    }
-
-
     public function index()
     {
-        $produks = Produk::with('category')->get();
-        $categories = Category::with('produks')->get();
+        $produks = Produk::all();
         $admin = auth()->user();
-        return view('produks.index', compact('produks' , 'categories', 'admin'));
+        return view('produks.index', compact('produks', 'admin'));
     }
 
     public function create()
     {
-        $categories = Category::all();
         $admin = auth()->user();
-        return view('produks.create', compact('categories', 'admin'));
+        return view('produks.create', compact('admin'));
     }
 
     public function store(Request $request)
@@ -40,7 +27,6 @@ class ProductController extends Controller
             'name' => 'required',
             'thumbnail' => 'required|image',
             'description' => 'required',
-            'category_id' => 'required|exists:categories,id',
         ]);
 
         $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
@@ -49,22 +35,21 @@ class ProductController extends Controller
             'name' => $request->name,
             'thumbnail' => $thumbnailPath,
             'description' => $request->description,
-            'category_id' => $request->category_id,
         ]);
 
         return redirect()->route('produks.index')->with('success', 'Produk created successfully.');
     }
 
-    public function show(Produk $produk)
+    public function show($id)
     {
-        return view('produks.show', compact('produk'));
+        $product = Produk::findOrFail($id);
+        return view('produks.show', compact('product'));
     }
 
     public function edit(Produk $produk)
     {
-        $categories = Category::all();
         $admin = auth()->user();
-        return view('produks.edit', compact('produk', 'categories', 'admin'));
+        return view('produks.edit', compact('produk', 'admin'));
     }
 
     public function update(Request $request, Produk $produk)
@@ -73,7 +58,6 @@ class ProductController extends Controller
             'name' => 'required',
             'thumbnail' => 'image',
             'description' => 'required',
-            'category_id' => 'required|exists:categories,id',
         ]);
 
         if ($request->hasFile('thumbnail')) {
@@ -84,7 +68,6 @@ class ProductController extends Controller
         $produk->update([
             'name' => $request->name,
             'description' => $request->description,
-            'category_id' => $request->category_id,
         ]);
 
         return redirect()->route('produks.index')->with('success', 'Produk updated successfully.');

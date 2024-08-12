@@ -143,7 +143,7 @@
 
         <!-- Footer Bottom -->
         <p class="text-gray-400 text-sm">
-            &copy; 2024 nama perusahaan. All rights reserved.
+            &copy; 2024 PT Biostark Analatika Inovasi. All rights reserved.
         </p>
     </div>
 </footer>

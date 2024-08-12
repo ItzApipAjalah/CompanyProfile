@@ -11,53 +11,84 @@
                 <div class="row">
                   <div class="col-lg-12 d-flex flex-column">
                     <div class="row flex-grow">
+                      <!-- Card for Total Visitors -->
                       <div class="col-md-6 col-lg-6 grid-margin stretch-card">
                         <div class="card card-rounded">
                           <div class="card-body">
                             <div class="row">
-                              <div class="col-md-6">
-                                <div class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
-                                  <div class="circle-progress-width">
-                                    <div id="totalVisitors" class="progressbar-js-circle pr-2"></div>
+                                <div class="col-md-6">
+                                  <div class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
+                                    <div class="circle-progress-width">
+                                      <div id="totalVisitors" class="progressbar-js-circle pr-2"></div>
+                                    </div>
+                                    <div>
+                                      <p class="text-small mb-2">Total Visitors</p>
+                                      <h4 class="mb-0 fw-bold">{{ $totalVisitors }} / {{ $maxVisitors }}</h4>
+                                    </div>
                                   </div>
-                                  <div>
-                                    <p class="text-small mb-2">Total Visitors</p>
-                                    <h4 class="mb-0 fw-bold">{{ $totalVisitors }} / {{ $maxVisitors }}</h4>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="d-flex justify-content-between align-items-center">
+                                    <div class="circle-progress-width">
+                                      <div id="visitperday" class="progressbar-js-circle pr-2"></div>
+                                    </div>
+                                    <div>
+                                      <p class="text-small mb-2">Visits per day</p>
+                                      <h4 class="mb-0 fw-bold">{{ $maxVisitsPerDay }} / {{ $maxVisitsPerDay }}</h4>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-md-6">
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <div class="circle-progress-width">
-                                    <div id="visitperday" class="progressbar-js-circle pr-2"></div>
-                                  </div>
-                                  <div>
-                                    <p class="text-small mb-2">Visits per day</p>
-                                    <h4 class="mb-0 fw-bold">{{ $maxVisitsPerDay }} / {{ $maxVisitsPerDay }}</h4>
-                                  </div>
-                                </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Card for Total Products -->
+                      <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+                        <div class="card card-rounded">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                              <div>
+                                <p class="text-small mb-2">Total Products</p>
+                                <h4 class="mb-0 fw-bold">{{ $totalProducts }}</h4>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
+
+                      <!-- Card for Total Blog Posts -->
+                      <div class="col-md-6 col-lg-6 grid-margin stretch-card">
+                        <div class="card card-rounded">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                              <div>
+                                <p class="text-small mb-2">Total Blog Posts</p>
+                                <h4 class="mb-0 fw-bold">{{ $totalBlogPosts }}</h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {{-- <!-- Additional Content Card -->
                       <div class="col-md-6 col-lg-6 grid-margin stretch-card">
                         <div class="card card-rounded">
                           <div class="card-body">
                             <p>Additional content here</p>
                           </div>
                         </div>
-                      </div>
+                      </div> --}}
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                  </div> <!-- End col-lg-12 -->
+                </div> <!-- End row -->
+              </div> <!-- End tab-pane -->
+            </div> <!-- End tab-content -->
+          </div> <!-- End home-tab -->
+        </div> <!-- End col-sm-12 -->
+      </div> <!-- End row -->
+    </div> <!-- End content-wrapper -->
+  </div> <!-- End main-panel -->
 @endsection
 
 @section('script')

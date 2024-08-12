@@ -184,10 +184,10 @@
 
 <!-- Blog Post Detail Section -->
 <section id="content" class="bg-gray-100 py-16">
-    <div class="w-full px-0">
-        <div class="bg-white shadow-lg rounded-none overflow-hidden" data-aos="fade-up">
+    <div class="container mx-auto">
+        <div class="bg-white shadow-lg overflow-hidden" data-aos="fade-up">
             <div class="p-4 lg:p-6">
-            <img src="{{ asset('storage/images/' . $post->image) }}" alt="{{ $post->title }}" class="w-fullobject-cover">
+                <img src="{{ asset('storage/images/' . $post->image) }}" alt="{{ $post->title }}" class="w-full h-auto object-cover mb-6">
 
                 <h2 class="text-2xl lg:text-3xl font-bold text-gray-800">{{ $post->title }}</h2>
 
@@ -207,6 +207,7 @@
         </div>
     </div>
 </section>
+
 
     <script>
         AOS.init();

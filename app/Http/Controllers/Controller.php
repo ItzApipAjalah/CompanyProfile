@@ -7,6 +7,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Admin;
 use App\Models\Visitor;
+use App\Models\Produk;
+
+use App\Models\BlogPost;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
@@ -27,11 +30,17 @@ class Controller extends BaseController
         // Get the total number of unique visitors
         $totalVisitors = Visitor::count();
 
+        // Get the total number of products
+        $totalProducts = Produk::count();
+
+        // Get the total number of blog posts
+        $totalBlogPosts = BlogPost::count();
+
         $maxVisitors = 50000;  // Example max value for progress calculation
 
         $admin = auth()->user();
 
-        return view('admin.dashboard', compact('admin', 'totalVisitors', 'maxVisitsPerDay', 'maxVisitors'));
+        return view('admin.dashboard', compact('admin', 'totalVisitors', 'maxVisitsPerDay', 'totalProducts', 'totalBlogPosts', 'maxVisitors'));
     }
 
 

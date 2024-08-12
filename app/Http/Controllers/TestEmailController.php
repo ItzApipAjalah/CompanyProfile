@@ -10,7 +10,7 @@ class TestEmailController extends Controller
 {
     public function sendTestEmail()
     {
-        $toEmail = 'afif@amwp.website';  // Replace this with your actual email address
+        $toEmail = 'support@biostark-ai.com';  // Replace this with your actual email address
 
         try {
             Mail::raw('This is a test email.', function ($message) use ($toEmail) {

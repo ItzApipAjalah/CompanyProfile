@@ -9,13 +9,23 @@
         </div>
         <!-- Navigation Links (Hidden on mobile by default) -->
         <nav class="hidden lg:flex items-center space-x-6">
-            <a href="{{ route('profile') }}" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Profile</a>
-            <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Produk</a>
-            <a href="#blog" id="scroll-blog" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Blog</a>
-            <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Kontak</a>
+            <a href="{{ route('profile') }}" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.about_us')</a>
+            <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.products_title')</a>
+            <a href="#blog" id="scroll-blog" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.blog_title')</a>
+            <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.contact_us')</a>
         </nav>
         <!-- Call-to-Action Button (Hidden on mobile by default) -->
-        <a href="#get-started" class="hidden lg:inline-block ml-4 bg-blue-950 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition" style="visibility: hidden;" >Get Started</a>
+        <div class="relative">
+            <button id="dropdown-button" class="hidden lg:inline-block ml-4 bg-teal-900 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                @lang('home.leanguage')
+            </button>
+            <div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg hidden">
+                <div class="p-2">
+                    <a href="{{ route('language.switch', 'en') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">English</a>
+                    <a href="{{ route('language.switch', 'id') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">Indonesian</a>
+                </div>
+            </div>
+        </div>
         <!-- Burger Menu Icon -->
         <div class="lg:hidden flex items-center">
             <button id="burger-menu-button" class="focus:outline-none">
@@ -28,10 +38,21 @@
     <!-- Mobile Navigation Menu -->
     <div id="mobile-menu" class="hidden lg:hidden">
         <nav class="flex flex-col items-center space-y-4 bg-transparent text-white p-4">
-            <a href="{{ route('profile') }}" class="hover:text-teal-400">Profile</a>
-            <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-teal-400">Produk</a>
-            <a href="#blog" id="scroll-blog" class="hover:text-teal-400">Blog</a>
-            <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-teal-400">Kontak</a>
+            <a href="{{ route('profile') }}" class="hover:text-teal-400">@lang('home.about_us')</a>
+            <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-teal-400">@lang('home.products_title')</a>
+            <a href="#blog" id="scroll-blog" class="hover:text-teal-400">@lang('home.blog_title')</a>
+            <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-teal-400">@lang('home.contact_us')</a>
+            <div class="relative mt-4">
+                <button id="mobile-dropdown-button" class="bg-teal-900 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                    @lang('home.leanguage')
+                </button>
+                <div id="mobile-dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg hidden">
+                    <div class="p-2">
+                        <a href="{{ route('language.switch', 'en') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">English</a>
+                        <a href="{{ route('language.switch', 'id') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">Indonesian</a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </div>
 </header>
@@ -42,7 +63,7 @@
     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-gray-900"></div>
     <!-- Hero Content -->
     <div class="relative z-10 text-center px-6 py-12 md:px-12 md:py-24">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Semua Blog <span class="text-teal-500">biostark</span></h1>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">@lang('home.blog') <span class="text-teal-500">biostark</span></h1>
         <!-- Scroll Down Animation -->
         <a href="#blog" id="scroll-to-blog" id="scroll-to-about" class="mt-8 inline-block" >
             <svg class="w-12 h-12 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -59,8 +80,8 @@
 <!-- Blog Section -->
 <section id="blog" class="py-16 bg-gray-200" data-aos="fade-up">
     <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center text-gray-800">Blog Kami</h2>
-        <p class="mt-4 text-lg text-center text-gray-700">Baca postingan dan pembaruan terbaru kami</p>
+        <h2 class="text-3xl font-bold text-center text-gray-800">@lang('home.blog_title')</h2>
+        <p class="mt-4 text-lg text-center text-gray-700">@lang('home.blog_subtitle')</p>
 
         <!-- Blog Grid -->
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -117,7 +138,30 @@
 @endsection
 
 @section('script')
+<script>
+    // Toggle dropdown menu
+    document.getElementById('dropdown-button').addEventListener('click', function() {
+    var dropdownMenu = document.getElementById('dropdown-menu');
+    dropdownMenu.classList.toggle('hidden');
+});
 
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+    const mobileDropdownMenu = document.getElementById('mobile-dropdown-menu');
+
+    if (mobileDropdownButton && mobileDropdownMenu) {
+        mobileDropdownButton.addEventListener('click', function() {
+            // Toggle visibility of dropdown menu
+            if (mobileDropdownMenu.classList.contains('hidden')) {
+                mobileDropdownMenu.classList.remove('hidden');
+            } else {
+                mobileDropdownMenu.classList.add('hidden');
+            }
+        });
+    }
+});
+
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const header = document.querySelector('header');

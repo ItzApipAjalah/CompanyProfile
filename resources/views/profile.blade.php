@@ -9,13 +9,23 @@
         </div>
         <!-- Navigation Links (Hidden on mobile by default) -->
         <nav class="hidden lg:flex items-center space-x-6">
-            <a href="#about" id="nav-scroll" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Profile</a>
-            <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Produk</a>
-            <a href="{{ route('blog') }}" id="scroll-blog" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Blog</a>
-            <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">Kontak</a>
+            <a href="#about" id="nav-scroll" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.about_us')</a>
+            <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.products_title')</a>
+            <a href="{{ route('blog') }}" id="scroll-blog" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.blog_title')</a>
+            <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-teal-400 hover:bg-white hover:bg-opacity-20 px-3 py-2 rounded transition">@lang('home.contact_us')</a>
         </nav>
         <!-- Call-to-Action Button (Hidden on mobile by default) -->
-        <a href="#get-started" class="hidden lg:inline-block ml-4 bg-blue-950 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition" style="visibility: hidden;">Get Started</a>
+        <div class="relative">
+            <button id="dropdown-button" class="hidden lg:inline-block ml-4 bg-teal-900 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                @lang('home.leanguage')
+            </button>
+            <div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg hidden">
+                <div class="p-2">
+                    <a href="{{ route('language.switch', 'en') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">English</a>
+                    <a href="{{ route('language.switch', 'id') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">Indonesian</a>
+                </div>
+            </div>
+        </div>
         <!-- Burger Menu Icon -->
         <div class="lg:hidden flex items-center">
             <button id="burger-menu-button" class="focus:outline-none">
@@ -28,10 +38,21 @@
     <!-- Mobile Navigation Menu -->
     <div id="mobile-menu" class="hidden lg:hidden">
         <nav class="flex flex-col items-center space-y-4 bg-transparent text-white p-4">
-            <a href="#about" id="scroll-about" class="hover:text-teal-400">Profile</a>
-            <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-teal-400">Produk</a>
-            <a href="{{ route('blog') }}" id="scroll-blog" class="hover:text-teal-400">Blog</a>
-            <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-teal-400">Kontak</a>
+            <a href="#about" id="scroll-about" class="hover:text-teal-400">@lang('home.about_us')</a>
+            <a href="{{ route('produk') }}" id="scroll-produk" class="hover:text-teal-400">@lang('home.products_title')</a>
+            <a href="{{ route('blog') }}" id="scroll-blog" class="hover:text-teal-400">@lang('home.blog_title')</a>
+            <a href="{{ route('home') }}#contact" id="scroll-contact" class="hover:text-teal-400">@lang('home.contact_us')</a>
+            <div class="relative mt-4">
+                <button id="mobile-dropdown-button" class="bg-teal-900 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                    @lang('home.leanguage')
+                </button>
+                <div id="mobile-dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg hidden">
+                    <div class="p-2">
+                        <a href="{{ route('language.switch', 'en') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">English</a>
+                        <a href="{{ route('language.switch', 'id') }}" class="block px-4 py-2 text-sm hover:bg-gray-200">Indonesian</a>
+                    </div>
+                </div>
+            </div>
         </nav>
     </div>
 </header>
@@ -42,7 +63,7 @@
     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-gray-900"></div>
     <!-- Hero Content -->
     <div class="relative z-10 text-center px-6 py-12 md:px-12 md:py-24">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Tentang <span class="text-teal-500">biostark</span></h1>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">@lang('home.about') <span class="text-teal-500">biostark</span></h1>
         <!-- Scroll Down Animation -->
         <a href="#about" id="scroll-to-about" class="mt-8 inline-block" >
             <svg class="w-12 h-12 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +79,7 @@
 <!-- About Us Section -->
 <section id="about" class="py-16 bg-gray-200 relative" data-aos="fade-up">
     <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center text-gray-800">Tentang Kami</h2>
+        <h2 class="text-3xl font-bold text-center text-gray-800">@lang('home.about_us')</h2>
         @foreach($profiles as $profile)
         <div class="mt-8 max-w-screen-lg mx-auto text-center relative z-10">
             <p class="mt-4 text-lg text-gray-700">
@@ -67,13 +88,13 @@
         </div>
         <div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-8 relative z-10">
             <div class="flex-1 text-center md:text-left p-6 md:p-0" data-aos="fade-up" data-aos-delay="100">
-                <h3 class="text-2xl font-semibold text-gray-800">Visi</h3>
+                <h3 class="text-2xl font-semibold text-gray-800">@lang('home.visi')</h3>
                 <p class="mt-2 text-gray-600">
                     {{ $profile->visi }}
                 </p>
             </div>
             <div class="flex-1 text-center md:text-left p-6 md:p-0" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="text-2xl font-semibold text-gray-800">Misi</h3>
+                <h3 class="text-2xl font-semibold text-gray-800">@lang('home.misi')</h3>
                 <p class="mt-2 text-gray-600">
                     {{ $profile->misi }}
                 </p>
@@ -83,6 +104,7 @@
     </div>
     <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://i.ibb.co.com/ZhnqtBq/20180115100741.jpg');"></div>
 </section>
+
 
 
 <!-- Organizational Structure Section -->
@@ -122,7 +144,39 @@
 </section>
 @endsection
 @section('script')
+<script>
+    // Toggle dropdown menu
+    document.getElementById('dropdown-button').addEventListener('click', function() {
+    var dropdownMenu = document.getElementById('dropdown-menu');
+    dropdownMenu.classList.toggle('hidden');
+});
 
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+    const mobileDropdownMenu = document.getElementById('mobile-dropdown-menu');
+
+    if (mobileDropdownButton && mobileDropdownMenu) {
+        mobileDropdownButton.addEventListener('click', function() {
+            // Toggle visibility of dropdown menu
+            if (mobileDropdownMenu.classList.contains('hidden')) {
+                mobileDropdownMenu.classList.remove('hidden');
+            } else {
+                mobileDropdownMenu.classList.add('hidden');
+            }
+        });
+    }
+});
+
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    var isClickInside = document.getElementById('dropdown-button').contains(event.target) ||
+                        document.getElementById('dropdown-menu').contains(event.target);
+    if (!isClickInside) {
+        document.getElementById('dropdown-menu').classList.add('hidden');
+    }
+});
+</script>
 <script>
         document.addEventListener('DOMContentLoaded', function() {
         const header = document.querySelector('header');

@@ -63,7 +63,7 @@
     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-gray-900"></div>
     <!-- Hero Content -->
     <div class="relative z-10 text-center px-6 py-12 md:px-12 md:py-24">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">@lang('home.available_products') <span class="text-teal-500">biostark</span></h1>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Produk <span class="text-teal-500">{{ $product->name }}</span></h1>
         <!-- Scroll Down Animation -->
         <a href="#products" id="scroll-to-products" class="mt-8 inline-block" >
             <svg class="w-12 h-12 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -76,28 +76,61 @@
     </svg>
 </section>
 
-<!-- Products Section -->
-<section id="products" class="bg-gray-100 py-16" data-aos="fade-up">
-    <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center text-gray-800">@lang('home.semua_produk')</h2>
-        <p class="mt-4 text-lg text-center text-gray-700">
-            @lang('home.produk_desc')
-        </p>
-
-        <div class="mt-12 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            @foreach($produks as $produk)
-                <a href="{{ route('product.show', $produk->id) }}" class="relative bg-white rounded-lg overflow-hidden shadow-lg cursor-pointer" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <img src="{{ asset('storage/' . $produk->thumbnail) }}" alt="{{ $produk->name }} Image" class="w-full h-56 object-cover">
-                    <div class="absolute inset-0 flex items-end justify-start p-6 bg-black bg-opacity-50">
-                        <div class="text-left">
-                            <h3 class="text-xl font-semibold text-white">{{ $produk->name }}</h3>
-                        </div>
+<div class="container mx-auto px-6 py-16" id="products">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row">
+        <!-- Image Section -->
+        <div class="w-full md:w-1/2">
+            <img src="{{ asset('storage/' . $product->thumbnail) }}" alt="{{ $product->name }} Image" class="w-full h-full object-cover object-center rounded-t-lg md:rounded-t-none md:rounded-l-lg">
+        </div>
+        <!-- Details Section -->
+        <div class="w-full md:w-1/2 p-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">{{ $product->name }}</h2>
+            <p class="text-gray-700 mb-6">{!! $product->description !!}</p>
+                <!-- Display success or error messages -->
+                @if (session('success'))
+                    <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-md">
+                        {{ session('success') }}
                     </div>
-                </a>
-            @endforeach
+                @endif
+
+                @if ($errors->any())
+                    <div class="mb-4 p-4 bg-red-100 text-red-700 rounded-md">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            <!-- Contact Form -->
+            <form action="{{ route('product.contact.submit') }}" method="POST">
+                @csrf
+                <div class="mb-5">
+                    <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                    <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-4 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out" required>
+                </div>
+                <div class="mb-5">
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-4 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out" required>
+                </div>
+                <div class="mb-5">
+                    <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                    <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-4 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out" required></textarea>
+                </div>
+
+                <!-- Hidden Fields for Product Details -->
+                <input type="hidden" name="product_name" value="{{ $product->name }}">
+                <input type="hidden" name="product_description" value="{{ $product->description }}">
+                <input type="hidden" name="product_image" value="{{ url('storage/' . $product->thumbnail) }}">
+
+                <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 ease-in-out transform hover:scale-105">Send Message</button>
+            </form>
         </div>
     </div>
-</section>
+</div>
+
+
+
 
 
 
@@ -106,9 +139,11 @@
 @endsection
 
 @section('script')
+
+
 <script>
-    // Toggle dropdown menu
-    document.getElementById('dropdown-button').addEventListener('click', function() {
+        // Toggle dropdown menu
+        document.getElementById('dropdown-button').addEventListener('click', function() {
     var dropdownMenu = document.getElementById('dropdown-menu');
     dropdownMenu.classList.toggle('hidden');
 });
@@ -128,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

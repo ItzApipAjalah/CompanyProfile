@@ -44,6 +44,31 @@ return [
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ],
+        'default' => [
+            'transport' => 'smtp',
+            'host' => env('MAIL_HOST', 'smtp.hostinger.com'),
+            'port' => env('MAIL_PORT', 465),
+            'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+            'username' => env('MAIL_USERNAME'),
+            'password' => env('MAIL_PASSWORD'),
+            'timeout' => null,
+            'auth_mode' => null,
+        ],
+
+        'biostark' => [
+            'transport' => 'smtp',
+            'host' => env('MAIL_HOST_BIOSTARK', 'smtp.hostinger.com'),
+            'port' => env('MAIL_PORT_BIOSTARK', 465),
+            'encryption' => env('MAIL_ENCRYPTION_BIOSTARK', 'ssl'),
+            'username' => env('MAIL_USERNAME_BIOSTARK', 'biostark-ai@biostark-ai.com'),
+            'password' => env('MAIL_PASSWORD_BIOSTARK', 'Biostark-ai123@'),
+            'timeout' => null,
+            'auth_mode' => null,
+            'from' => [
+                'address' => 'biostark-ai@biostark-ai.com',
+                'name' => 'Biostark AI',
+            ],
+        ],
 
         'ses' => [
             'transport' => 'ses',

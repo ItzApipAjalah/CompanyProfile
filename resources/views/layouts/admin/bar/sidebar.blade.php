@@ -8,17 +8,10 @@
       </li>
       <li class="nav-item nav-category">Admin Panel</li>
       <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <a class="nav-link" href="{{ route('produks.index') }}">
           <i class="menu-icon mdi mdi-floor-plan"></i>
-          <span class="menu-title">Produks Manager</span>
-          <i class="menu-arrow"></i>
+          <span class="menu-title">Manage Produk</span>
         </a>
-        <div class="collapse" id="ui-basic">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{{ route('produks.index') }}">Manage Produks</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{ route('categories.index') }}">Manage Category</a></li>
-          </ul>
-        </div>
       </li>
 
       <li class="nav-item">

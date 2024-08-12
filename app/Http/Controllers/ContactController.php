@@ -37,7 +37,7 @@ class ContactController extends Controller
         ]);
 
         // Send email to admin
-        Mail::to('afifmedya@gmail.com')->send(new ContactFormMail($request->name, $request->email, $request->message));
+        Mail::to('support@biostark-ai.com')->send(new ContactFormMail($request->name, $request->email, $request->message));
 
         // Send confirmation email to the user
         Mail::to($request->email)->send(new ContactFormMail($request->name, $request->email, $request->message));

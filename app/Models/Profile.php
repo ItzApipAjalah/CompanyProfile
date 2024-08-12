@@ -14,4 +14,6 @@ class Profile extends Model
         'visi',
         'misi',
     ];
+
+
 }

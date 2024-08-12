@@ -7,11 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CategoryController;
+// use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\TestEmailController;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ProductContactController;
+use App\Http\Controllers\AdminForgotPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +24,8 @@ use App\Http\Controllers\ContactController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::post('/product/contact', [ProductContactController::class, 'submit'])->name('product.contact.submit');
 Route::get('/test-email', [TestEmailController::class, 'sendTestEmail']);
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
@@ -29,11 +33,14 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 
-Route::get('/category/{name}', [ProductController::class, 'showCategoryProducts'])->name('category.products');
-
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/semua-blog', [App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
 Route::get('/semua-produk', [App\Http\Controllers\HomeController::class, 'produks'])->name('produk');
-
+Route::get('language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
+Route::get('admin/password/reset', [AdminForgotPasswordController::class, 'showLinkRequestForm'])->name('admin.password.request');
+Route::post('admin/password/email', [AdminForgotPasswordController::class, 'sendResetLinkEmail'])->name('admin.password.email');
+Route::get('admin/password/reset/{token}', [AdminForgotPasswordController::class, 'showResetForm'])->name('admin.password.reset');
+Route::post('admin/password/reset', [AdminForgotPasswordController::class, 'reset'])->name('admin.password.update');
 // login
 Route::middleware('redirect_if_authenticated:admin')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -67,13 +74,13 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/profiles/{profile}/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
     Route::put('/admin/profiles/{profile}', [ProfileController::class, 'update'])->name('profiles.update');
 
-    Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('categories.create');
-    Route::post('/admin/categories', [CategoryController::class, 'store'])->name('categories.store');
-    Route::get('/admin/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
-    Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
-    Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    // Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
+    // Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    // Route::post('/admin/categories', [CategoryController::class, 'store'])->name('categories.store');
+    // Route::get('/admin/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+    // Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    // Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    // Route::delete('/admin/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
     Route::get('/admin/blog-posts', [BlogPostController::class, 'index'])->name('blog-posts.index');
     Route::get('/admin/blog-posts/create', [BlogPostController::class, 'create'])->name('blog-posts.create');
@@ -83,5 +90,9 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/blog-posts/{id}/edit', [BlogPostController::class, 'edit'])->name('blog-posts.edit');
     Route::put('/admin/blog-posts/{id}', [BlogPostController::class, 'update'])->name('blog-posts.update');
     Route::delete('/admin/blog-posts/{id}', [BlogPostController::class, 'destroy'])->name('blog-posts.destroy');
+
+
+    Route::get('admin/password/change', [AdminForgotPasswordController::class, 'showChangePasswordForm'])->name('admin.password.change');
+    Route::post('admin/password/change', [AdminForgotPasswordController::class, 'changePassword'])->name('admin.password.change.submit');
 
 });
